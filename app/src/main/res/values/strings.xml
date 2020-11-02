@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TestWeather</string>
+    <string name="title_dynamicfeature">Module Title</string>
+    <string name="title_dynamicfeature2">Module Title</string>
+
+    <string name="common_error_unknown">Что-то пошло не так..</string><!--Неизвестная ошибка любого запроса на сервер-->
+    <string name="common_error_server">Ошибка получения данных от сервера</string><!--Ошибка сервера любого запроса на сервер-->
+    <string name="common_error_network">Нет подключения к Интернет</string>
+    <string name="threeDays">3 Days</string><!--Ошибка интернета любого запроса на сервер-->
+    <string name="sevenDays">7 Days</string>
+    <string name="enterCity">Введите город</string>
+    <string name="add">Add</string><!--Ошибка интернета любого запроса на сервер-->
+</resources>

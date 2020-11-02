@@ -1,0 +1,96 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+
+    ext {
+
+        androidCompileSdkVersion = 29
+        androidBuildToolsVersion = "29.0.3"
+        androidMinSdkVersion = 21
+        androidTargetSdkVersion = 29
+        androidVersionCode = 1
+        androidVersionName = "1.0"
+
+        versions = [
+                gradle              : '3.6.3',
+
+                kotlin              : '1.3.72',
+
+                koin                : '2.1.4',
+
+                rx_java             : '3.0.1',
+                rx_kotlin           : '3.0.0-RC1',
+                rx_android          : '3.0.0',
+
+                retrofit            : '2.7.2',
+                retrofit_rx         : '3.0.0',
+                logging_interceptor : '4.4.0',
+
+                lifecycle           : '2.2.0',
+
+                support             : '1.1.0',
+                constraint_layout   : '1.1.3',
+                recycler_view       : '1.1.0',
+                swipe_refresh_layout: '1.0.0',
+
+                picasso             : '2.71828',
+
+                material            : '1.2.0-alpha06'
+        ]
+
+        jetbrains = [
+                kotlin: ("org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin")
+        ]
+
+        koin = [
+                core     : "org.koin:koin-core:$versions.koin",
+                viewModel: "org.koin:koin-androidx-viewmodel:$versions.koin"
+        ]
+
+        rx = [
+                java   : ("io.reactivex.rxjava3:rxjava:$versions.rx_java"),
+                kotlin : ("io.reactivex.rxjava3:rxkotlin:$versions.rx_kotlin"),
+                android: ("io.reactivex.rxjava3:rxandroid:$versions.rx_android"),
+        ]
+
+        image = [
+                picasso        : "com.squareup.picasso:picasso:$versions.picasso"
+        ]
+
+        retrofit = [
+                retrofit          : ("com.squareup.retrofit2:retrofit:$versions.retrofit"),
+                converterJson     : ("com.squareup.retrofit2:converter-gson:$versions.retrofit"),
+                converterScalars  : ("com.squareup.retrofit2:converter-scalars:$versions.retrofit"),
+                adapterRx         : ("com.github.akarnokd:rxjava3-retrofit-adapter:$versions.retrofit_rx"),
+                loggingInterceptor: ("com.squareup.okhttp3:logging-interceptor:$versions.logging_interceptor"),
+        ]
+    }
+
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:$versions.gradle"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "org.koin:koin-gradle-plugin:$versions.koin"
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+

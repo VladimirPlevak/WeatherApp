@@ -1,0 +1,102 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'koin'
+
+android {
+    compileSdkVersion androidCompileSdkVersion
+    buildToolsVersion androidBuildToolsVersion
+
+    defaultConfig {
+        applicationId "com.filit.testweather"
+
+        minSdkVersion androidMinSdkVersion
+        targetSdkVersion androidTargetSdkVersion
+        versionCode androidVersionCode
+        versionName androidVersionName
+
+        buildConfigField "String", "OPEN_WEATHER_API_KEY", '"c49220fb645500f3bf86b9ffa915276f"'
+        buildConfigField "String", "API_HOST", '"https://api.openweathermap.org/"'
+
+        vectorDrawables.useSupportLibrary = true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    dynamicFeatures = []
+
+
+}
+
+androidExtensions {
+    experimental = true
+}
+
+ext {
+
+    lifecycle = [
+            common: "androidx.lifecycle:lifecycle-common-java8:$versions.lifecycle"
+    ]
+
+    androidx = [
+            appcompat         : "androidx.appcompat:appcompat:$versions.support",
+            core              : "androidx.core:core-ktx:$versions.support",
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:$versions.constraint_layout",
+            recyclerView      : "androidx.recyclerview:recyclerview:$versions.recycler_view",
+            swipeRefreshLayout: "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swipe_refresh_layout",
+    ]
+
+    google = [
+            material: "com.google.android.material:material:$versions.material",
+    ]
+}
+
+dependencies {
+
+    implementation project(":domain")
+    implementation project(":data")
+
+    implementation jetbrains.kotlin
+
+    implementation koin.viewModel
+
+    implementation rx.java
+    implementation rx.kotlin
+    implementation rx.android
+
+    implementation retrofit.retrofit
+    implementation retrofit.converterJson
+    implementation retrofit.converterScalars
+    implementation retrofit.adapterRx
+    implementation retrofit.loggingInterceptor
+
+    implementation lifecycle.common
+
+    implementation androidx.appcompat
+    implementation androidx.core
+    implementation androidx.constraintLayout
+    implementation androidx.recyclerView
+    implementation androidx.swipeRefreshLayout
+
+    implementation google.material
+
+    implementation image.picasso
+}

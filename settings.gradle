@@ -1,0 +1,4 @@
+rootProject.name='TestWeather'
+include ':app'
+include ':domain'
+include ':data'

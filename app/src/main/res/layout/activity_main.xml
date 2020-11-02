@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/srlRefreshWeather"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.weather.WeatherActivity">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+
+
+            <TextView
+                android:id="@+id/tvCityWeather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="15dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/textBlack"
+                android:textSize="28sp"
+                app:layout_constraintBottom_toTopOf="@+id/tvCurrentDate"
+                app:layout_constraintEnd_toStartOf="@+id/btn_cities"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Moscow" />
+
+            <TextView
+                android:id="@+id/tvCurrentDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/textGrey"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCityWeather"
+                app:layout_constraintBottom_toTopOf="@+id/ic_weather"
+                tools:text="Tuesday, 28 October" />
+
+            <ImageView
+                android:id="@+id/ic_weather"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="38dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentDate"
+                app:layout_constraintBottom_toTopOf="@+id/tvCurrentTemperature"
+                app:srcCompat="@drawable/ic_partly_cloudy_white" />
+
+            <TextView
+                android:id="@+id/tvCurrentTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/textBlack"
+                android:textSize="42sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ic_weather"
+                app:layout_constraintBottom_toTopOf="@+id/tvTemperatureFelt"
+                tools:text="+7\u2103" />
+
+            <TextView
+                android:id="@+id/tvTemperatureFelt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:textColor="@color/textGrey"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCurrentTemperature"
+                app:layout_constraintBottom_toTopOf="@+id/additionalInfo"
+                tools:text="Feels like +4\u2103" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/additionalInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tlWeatherForecastTabs"
+                app:layout_constraintTop_toBottomOf="@+id/tvTemperatureFelt">
+
+                <ImageView
+                    android:id="@+id/ic_wind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_wind" />
+
+                <TextView
+                    android:id="@+id/tvWind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/textGrey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/ic_wind"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="1 m/s, SW" />
+
+                <ImageView
+                    android:id="@+id/ic_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toEndOf="@+id/tvPressure"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_humidity" />
+
+                <TextView
+                    android:id="@+id/tvHumidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/textGrey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/ic_humidity"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="74%" />
+
+                <ImageView
+                    android:id="@+id/icPressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toEndOf="@+id/tvWind"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_pressure" />
+
+                <TextView
+                    android:id="@+id/tvPressure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/textGrey"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toEndOf="@+id/icPressure"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="753 mmHg" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/btn_cities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                app:layout_constraintBottom_toBottomOf="@+id/tvCityWeather"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvCityWeather"
+                app:srcCompat="@drawable/ic_menu" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tlWeatherForecastTabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/additionalInfo"
+                app:layout_constraintBottom_toTopOf="@+id/vpWeatherForecastPager"
+                app:tabMode="fixed"
+                app:tabRippleColor="@null"
+                app:tabTextColor="@color/textGrey"
+                app:tabSelectedTextColor="@color/textBlack"
+                app:tabTextAppearance="@style/TabTextStyle">
+
+            </com.google.android.material.tabs.TabLayout>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/vpWeatherForecastPager"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tlWeatherForecastTabs" />
+
+            <ProgressBar
+                android:id="@+id/pgLoading"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
