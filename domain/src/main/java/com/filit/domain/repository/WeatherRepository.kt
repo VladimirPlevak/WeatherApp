@@ -5,5 +5,5 @@ import com.filit.domain.model.WeatherModel
 import io.reactivex.rxjava3.core.Single
 
 interface   WeatherRepository {
-    fun loadWeatherForecast(model: WeatherLoadModel): Single<WeatherModel>
+    fun loadWeatherForecast(city: String): Single<WeatherModel>
 }

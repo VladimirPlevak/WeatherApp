@@ -40,14 +40,10 @@ fun View.applyVisibilityState(state: ViewVisibilityState) {
     }
 }
 
-
-
-
 fun Activity.finishSuccessful(result: Intent? = null) {
     setResult(Activity.RESULT_OK, result)
     finish()
 }
-
 
 fun ImageView.loadImage(
     url: String?

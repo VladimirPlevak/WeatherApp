@@ -1,5 +1,6 @@
 package com.filit.data.repositoryImpl
 
+import com.filit.data.BuildConfig
 import com.filit.data.WeatherApi
 import com.filit.data.common.mapper.WeatherForecastMapper
 import com.filit.data.common.mapper.WeatherMapper
@@ -13,11 +14,12 @@ class WeatherRepositoryImpl(
 ) : WeatherRepository {
 
     private val weatherForecastMapper by lazy { WeatherForecastMapper() }
+    private val remoteServiceAppId = BuildConfig.OPEN_WEATHER_API_KEY
 
-    override fun loadWeatherForecast(model: WeatherLoadModel): Single<WeatherModel> =
-        api.loadWeather(cityName = model.city, remoteServiceAppId = model.remoteServiceAppId)
+    override fun loadWeatherForecast(city: String): Single<WeatherModel> =
+        api.loadWeather(cityName = city, remoteServiceAppId = remoteServiceAppId)
             .flatMap {weatherApiModel->
-                api.loadForecastWeather(lat = weatherApiModel.coordinate.lat,lon = weatherApiModel.coordinate.lon, remoteServiceAppId = model.remoteServiceAppId)
+                api.loadForecastWeather(lat = weatherApiModel.coordinate.lat,lon = weatherApiModel.coordinate.lon, remoteServiceAppId = remoteServiceAppId)
                     .flatMap { Single.just(weatherForecastMapper.apply(it, weatherApiModel))}
 
             }

@@ -25,26 +25,12 @@ class CitiesActivity : BaseActivity<CitiesViewModel>(CitiesViewModel::class) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.a_cities)
-        val prefs = getSharedPreferences(Constants.CITY, Context.MODE_PRIVATE)
-        prefs.saveCityList(listOf<String>("Moscow", "Minsk"))
-        viewModel.loadCities(
-            prefs.getCities().map { CityLoadModel(
-                it,
-                BuildConfig.OPEN_WEATHER_API_KEY
-            ) }
-        )
+        viewModel.loadCities()
         btnAddCity.setOnClickListener {
-            viewModel.addCities(
-                CityLoadModel(
-                    svAddCity.query.toString(),
-                    BuildConfig.OPEN_WEATHER_API_KEY
-                )
-            )
+            viewModel.addCities(svAddCity.query.toString())
         }
         viewModel.citesState.observe(this) {
             val citiesLayoutManger = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-            prefs.saveCityList(it.map{cityModel->
-                cityModel.city})
             val citiesAdapter = CitiesAdapter(it,
                 object : CitiesAdapter.Listener {
                     override fun onClick(position: Int) = viewModel.clickOnCity(position)

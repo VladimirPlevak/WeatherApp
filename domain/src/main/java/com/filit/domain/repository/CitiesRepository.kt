@@ -8,6 +8,6 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 interface CitiesRepository {
-     fun loadCities(listCities: List<CityLoadModel>): Single<List<CityModel>>
-     fun loadCity(city: CityLoadModel): Single<CityModel>
+     fun loadCitiesRemote(listCities: List<String>): Single<List<CityModel>>
+     fun loadCityRemote(city: String): Single<CityModel>
 }

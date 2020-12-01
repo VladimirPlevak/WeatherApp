@@ -10,11 +10,8 @@ interface WeatherUseCases {
 }
 
     sealed class WeatherLoadAction {
-
-        abstract val model: WeatherLoadModel
-
-        data class First(override val model: WeatherLoadModel) : WeatherLoadAction()
-        data class Refresh(override val model: WeatherLoadModel) : WeatherLoadAction()
+        object First: WeatherLoadAction()
+        object Refresh: WeatherLoadAction()
     }
 
     sealed class WeatherLoadState {

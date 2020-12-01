@@ -23,16 +23,17 @@ class CitiesViewModel(
         initLoadState()
     }
 
-    fun loadCities(cityModelList: List<CityLoadModel>) = citiesUseCases.loadCitiesAction(
-        CitiesAction.LoadCitiesAction(cityModelList)
+    fun loadCities() = citiesUseCases.loadCitiesAction(
+        CitiesAction.LoadCitiesAction
     )
 
-    fun addCities(model: CityLoadModel) = citiesUseCases.loadCitiesAction(
-        CitiesAction.AddCityAction(model)
+    fun addCities(city: String) = citiesUseCases.loadCitiesAction(
+        CitiesAction.AddCityAction(city)
     )
 
-    fun clickOnCity(position: Int) = cityModelList.getOrNull(position)
+    fun clickOnCity(position: Int) = cityModelList[position]
         .let {
+            citiesUseCases.changeCurrentCityAction(it.city)
             openWeather.value = it
         }
     private fun initLoadState() {

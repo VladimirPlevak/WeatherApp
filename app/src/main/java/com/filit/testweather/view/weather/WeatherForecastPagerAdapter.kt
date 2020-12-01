@@ -1,30 +1,35 @@
 package com.filit.testweather.view.weather
 
 import android.content.Context
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.PagerAdapter
 import com.filit.domain.model.WeatherForecastModel
 import com.filit.testweather.R
+import kotlinx.android.synthetic.main.f_weather_forecast_fragment.view.*
 
 class WeatherForecastPagerAdapter(
     private val weatherForecastList: List<WeatherForecastModel>,
-    fragmentManager: FragmentManager,
     private val ctx: Context
-): FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+): PagerAdapter() {
 
-    /*private var weatherForecastList= mutableListOf<WeatherForecastModel>()
-    fun setData( weatherForecastList: List<WeatherForecastModel>){
-        this.weatherForecastList.clear()
-        this.weatherForecastList.addAll(weatherForecastList)
-        notifyDataSetChanged()
-    }*/
-    override fun getItem(position: Int): Fragment {
-        return when (position) {
-            0 -> ThreeDaysWeatherForecastFragment.newInstance(weatherForecastList.take(3))
-            1 -> SevenDaysWeatherForecastFragment.newInstance(weatherForecastList.take(7))
-            else -> throw RuntimeException("Page not found")
-        }
+    override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        val view = LayoutInflater.from(container.context)
+            .inflate(R.layout.f_weather_forecast_fragment, container, false)
+        val weatherForecastAdapter = WeatherForecastAdapter(getItem(position = position))
+        view.rvForecastWeather.adapter = weatherForecastAdapter
+        view.rvForecastWeather.setHasFixedSize(true)
+        view.rvForecastWeather.layoutManager = LinearLayoutManager(container.context, RecyclerView.VERTICAL, false)
+        container.addView(view)
+        return view
+    }
+
+    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
+        val view = `object` as View
+        container.removeView(view)
     }
 
     override fun getPageTitle(position: Int) =
@@ -36,5 +41,17 @@ class WeatherForecastPagerAdapter(
             }
         )
 
+    override fun isViewFromObject(view: View, `object`: Any): Boolean {
+        return view == `object`
+    }
+
     override fun getCount(): Int = 2
+
+    private fun getItem(position: Int): List<WeatherForecastModel> {
+        return when (position) {
+            0 -> weatherForecastList.take(3)
+            1 -> weatherForecastList.take(7)
+            else -> throw RuntimeException("Page not found")
+        }
+    }
 }

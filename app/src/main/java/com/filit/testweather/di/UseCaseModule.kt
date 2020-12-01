@@ -9,7 +9,7 @@ import com.filit.domain.usecase.CitiesUseCases
 import org.koin.dsl.module
 
 val useCasesModule = module {
-    factory<WeatherUseCases> { WeatherInteractor(get(), get()) }
-    factory<CitiesUseCases> { CitiesInteractor(get(), get()) }
+    factory<WeatherUseCases> { WeatherInteractor(get(), get(), get()) }
+    factory<CitiesUseCases> { CitiesInteractor(get(), get(), get()) }
     factory<AppUseCases> { AppInteractor(get()) }
 }

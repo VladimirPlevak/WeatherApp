@@ -2,6 +2,7 @@ package com.filit.testweather.view.weather
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import com.filit.domain.model.WeatherLoadModel
 import com.filit.testweather.BuildConfig
@@ -19,7 +20,6 @@ class WeatherActivity : BaseActivity<WeatherViewModel>(WeatherViewModel::class) 
             Intent(context, WeatherActivity::class.java)
                 .putExtra(Intent.EXTRA_TEXT, city)
     }
-    private var weatherLoadModel: WeatherLoadModel = WeatherLoadModel("Moscow", BuildConfig.OPEN_WEATHER_API_KEY)
 
 
 
@@ -27,15 +27,10 @@ class WeatherActivity : BaseActivity<WeatherViewModel>(WeatherViewModel::class) 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        if (intent.getStringExtra(Intent.EXTRA_TEXT) != null) {
-            val city = intent.getStringExtra(Intent.EXTRA_TEXT)!!
-            weatherLoadModel = WeatherLoadModel(city, BuildConfig.OPEN_WEATHER_API_KEY)
-            viewModel.firstLoadWeather(weatherLoadModel)
-        }
         btn_cities.setOnClickListener {
             viewModel.clickOnCitiesButton()
         }
-        srlRefreshWeather.setOnRefreshListener { viewModel.refreshLoadWeather(weatherLoadModel) }
+        srlRefreshWeather.setOnRefreshListener { viewModel.refreshLoadWeather() }
 
 
         viewModel.weatherState.observe(this) {
@@ -46,9 +41,10 @@ class WeatherActivity : BaseActivity<WeatherViewModel>(WeatherViewModel::class) 
             tvHumidity.text = it.humidity
             tvPressure.text = it.pressure
             tvTemperatureFelt.text = it.tempFeelsLike
-            ic_weather.loadImage(it.cloudy_URL.createLargeCloudyImageUrl())
+            val url = it.cloudy_URL.createLargeCloudyImageUrl()
+            ic_weather.loadImage(url)
             tlWeatherForecastTabs.setupWithViewPager(vpWeatherForecastPager)
-            val adapter = WeatherForecastPagerAdapter(it.weatherForecastList?: listOf(), supportFragmentManager, this)
+            val adapter = WeatherForecastPagerAdapter(it.weatherForecastList?: listOf(), this)
             vpWeatherForecastPager.adapter = adapter
             vpWeatherForecastPager.currentItem = viewModel.selectedPagePosition
             vpWeatherForecastPager.addOnPageSelectedListener{

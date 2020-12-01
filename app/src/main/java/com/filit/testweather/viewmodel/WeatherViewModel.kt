@@ -7,7 +7,6 @@ import com.filit.domain.usecase.WeatherLoadAction
 import com.filit.domain.usecase.WeatherLoadStageState
 import com.filit.domain.usecase.WeatherLoadState
 import com.filit.domain.usecase.WeatherUseCases
-import com.filit.testweather.BuildConfig
 import com.filit.testweather.common.extension.SingleLiveEventEmpty
 
 
@@ -32,19 +31,20 @@ class WeatherViewModel(
 
     init {
         initLoadState()
+        firstLoadWeather()
     }
 
-    fun firstLoadWeather(weatherLoadModel: WeatherLoadModel) = weatherUseCases.loadAction(
-        WeatherLoadAction.First(model = weatherLoadModel)
+    private fun firstLoadWeather() = weatherUseCases.loadAction(
+        WeatherLoadAction.First
     )
 
-    fun refreshLoadWeather(weatherLoadModel: WeatherLoadModel) = weatherUseCases.loadAction(
-        WeatherLoadAction.Refresh(model = weatherLoadModel)
+    fun refreshLoadWeather() = weatherUseCases.loadAction(
+        WeatherLoadAction.Refresh
     )
 
-    fun loadWeather(city: String) {
+    fun loadWeather() {
         weatherUseCases.loadAction(
-            WeatherLoadAction.First(WeatherLoadModel(city = city, remoteServiceAppId = BuildConfig.OPEN_WEATHER_API_KEY))
+            WeatherLoadAction.First
         )
     }
 

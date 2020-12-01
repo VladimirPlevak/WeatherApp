@@ -2,12 +2,11 @@ package com.filit.domain.usecase
 
 import com.filit.domain.model.CityLoadModel
 import com.filit.domain.model.CityModel
-import com.filit.domain.model.WeatherLoadModel
-import com.filit.domain.model.WeatherModel
 import io.reactivex.rxjava3.core.Observable
 
 interface CitiesUseCases {
     fun loadCitiesAction(action: CitiesAction)
+    fun changeCurrentCityAction(city: String)
     fun loadState(): Observable<CitiesLoadState>
 }
 
@@ -20,8 +19,8 @@ sealed class CitiesLoadState {
 
 
 sealed class CitiesAction {
-    data class LoadCitiesAction(val cityList: List<CityLoadModel>): CitiesAction()
-    data class AddCityAction(val city: CityLoadModel): CitiesAction()
+    object LoadCitiesAction: CitiesAction()
+    data class AddCityAction(val city: String): CitiesAction()
 }
 
 

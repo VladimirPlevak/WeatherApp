@@ -13,6 +13,8 @@ android {
         versionName androidVersionName
 
         consumerProguardFiles 'consumer-rules.pro'
+
+        buildConfigField "String", "OPEN_WEATHER_API_KEY", '"c49220fb645500f3bf86b9ffa915276f"'
     }
 
     buildTypes {
