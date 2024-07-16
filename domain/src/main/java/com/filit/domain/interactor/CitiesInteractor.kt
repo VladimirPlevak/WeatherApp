@@ -32,6 +32,8 @@ class CitiesInteractor(
                 }.observeOn(schedulerRepository.ui())
             }
 
+    fun newfunc (){}
+
     private fun loadCitiesStageState (cityLoadModelsList: List<String>) =
         citiesRepository
             .loadCitiesRemote(cityLoadModelsList)
